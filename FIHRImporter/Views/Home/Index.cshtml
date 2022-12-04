@@ -1,0 +1,112 @@
+﻿@inject IHttpContextAccessor contxt;
+
+
+@{
+    ViewData["Title"] = "Home Page";
+
+    int countt = 69;
+
+    void Navys()
+    {
+        countt++;
+
+    }
+
+    void Button1_Click(object sender, EventArgs e)
+    {
+        countt++;  
+    }
+
+
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    
+    <ul>
+        <li>Student id: @contxt.HttpContext.Session.GetInt32("StudentId")</li>
+        <li>Student id: @contxt.HttpContext.Session.GetString("StudentName")</li>
+
+    </ul>
+
+</div>
+            
+@countt
+
+@if(countt == 71)
+{
+    
+    <div>-------------------------------------------------PABLO----------------------------------------------------------</div>
+
+}
+
+<form>
+   <input type="text" id="number" value="0"/>
+   <input type="button" onclick="incrementValue()" value="Increment Value" />
+</form>
+
+
+<div>-----------------------------------------------------------------------------------------------------------------------------</div>
+
+
+
+
+<form>
+   <input type="text" id="numberr" value="@countt"/>
+   <input type="button" onclick="Pocitadlo()" value="Increment Value" />
+</form>
+
+
+
+<form>
+   <input type="text" id="numberr" value="@countt"/>
+   <input type="button" id="Button1" onclick="funcall()" value="Increment Value" />
+</form>
+
+
+
+
+<div>-----------------------------------------------------------------------------------------------------------------------------</div>
+
+
+
+
+  <form method="post" style="float:right; width:5%" asp-page-handler="Page4back">
+                     <button>PLUS 1....</button>
+            </form>
+
+
+
+
+<script>
+
+    src="_framework/blazor.webassembly.js";
+
+function incrementValue(COUNT)
+        {
+            var value = parseInt(document.getElementById('number').value, 10);
+            value = isNaN(value) ? 0 : value;
+            value++;
+            document.getElementById('number').value = value;
+        }
+
+
+function Pocitadlo()
+        {
+            var value = parseInt(document.getElementById('numberr').value);
+            value = isNaN(value) ? 0 : value;
+            value++;
+          
+            document.getElementById('numberr').value = value;
+        }
+     
+
+        function funcall()
+        {
+           DotNet.invokeMethodAsync('HomeController', 'CSCallBackMethod');
+        }
+        
+
+</script>
+
